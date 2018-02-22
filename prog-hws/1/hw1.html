@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<head>
+<!--
+
+Titile:	COMP.5460 Programming Assignment 1
+Author:	Yang Meng
+StuID: 	01679623
+Email: 	Yang_Meng@student.uml.edu
+
+-->
+<title>Yang Meng - Programming Assignment 1 - COMP.5460 Computer Graphics I, Spring 2018</title>
+<style type="text/css">
+body{
+	font-family: sans-serif;
+	}
+	
+canvas {
+	margin-bottom: 1em;
+	border: 1px solid red;
+} 
+
+input[type=number] 
+
+{max-width: 6em;}
+
+#convas {
+  <!--border: 1px solid red;-->
+  margin: 0px auto;
+  text-align: center;
+}
+
+</style>
+
+</head>
+
+
+<body>
+<p style="font-weight: bold; text-align:center; font-size:150%" >Yang Meng - Programming Assignment 1 - COMP.5460 Computer Graphics I (Spring 2018)</p>
+<br><br>
+
+
+<p style="font-size:120%">Directions:</p>
+<ul style="list-style-type:none">
+<p style="font-size:120%">
+  <li><p style="font-size:120%">1) This page is the Non-Interactive Version</p></li>
+  <li><p style="font-size:120%">2) In this page you could draw primitives & shapes by specifying the parameters.</p></li>
+  <li><p style="font-size:120%">3) Also, an <a href="hw1_interactive_version.html">Interactive Version</a> is available to draw those primitives & shapes.</p></li>
+
+</ul>
+
+<div id="convas">
+<canvas id="c" style="background-color: #e0f1ff"></canvas>
+</div>
+
+<script src="canvas.js"></script>
+<script src="line.js"></script>
+<script src="circle.js"></script>
+<script src="ellipse.js"></script>
+<script src="rectangle.js"></script>
+<script src="poly.js"></script>
+
+<script type="text/javascript">
+
+function initDrawForm(formId, drawFunction, numArgsForDrawFunction, defaultInputValues) {
+
+	var form = document.getElementById(formId);
+
+	var inputs = form.querySelectorAll("input[type=number]");
+	for (var i = 0; i < inputs.length; i++) {
+		inputs[i].min = 0;
+		inputs[i].max = side_length;
+		inputs[i].value = defaultInputValues[i];
+	}
+
+	form.onsubmit = function(event) {
+		event.preventDefault();
+
+		clearCanvas();
+		if (numArgsForDrawFunction == 3) {
+			drawFunction(parseInt(inputs[0].value), parseInt(inputs[1].value), parseInt(inputs[2].value));
+		}
+		else if (numArgsForDrawFunction == 4) {
+			drawFunction(parseInt(inputs[0].value), parseInt(inputs[1].value), parseInt(inputs[2].value), parseInt(inputs[3].value));
+		}
+		else {
+			inputs = form.querySelectorAll("input[type=number]");
+			var numbers = Array.prototype.map.call(inputs, function(input) {return parseInt(input.value);});
+			drawFunction(numbers);
+		}
+	};
+}
+
+</script>
+
+
+<form id="line" style="font-size:120%">
+	1) Draw a line: from (<input type="number" required>, <input type="number" required>) to (<input type="number" required>, <input type="number" required>)
+	<button type="submit">Draw</button>
+</form>
+<script type="text/javascript">
+	initDrawForm("line", midpointLine, 4, [side_length/2, side_length/2, side_length/4, side_length/4]);
+</script>
+<br>
+
+
+<form id="circle" style="font-size:120%">
+	2) Draw a circle: center=(<input type="number" required>, <input type="number" required>), radius=<input type="number" required min="0">
+	<button type="submit">Draw</button>
+</form>
+<script type="text/javascript">
+	initDrawForm("circle", midpointCircle, 3, [side_length/2, side_length/2, side_length/4]);
+</script>
+<br>
+
+
+<form id="ellipse" style="font-size:120%">
+	3) Draw an ellipse:
+	center=(<input type="number" required>, <input type="number" required>), rx=<input type="number" required>, ry=<input type="number" required>)
+	<button type="submit">Draw</button>
+</form>
+<script type="text/javascript">
+	initDrawForm("ellipse", midpointEllipse, 4, [side_length/2, side_length/2, side_length/4, side_length/10]);
+</script>
+<br>
+
+
+
+<form id="rectangle" style="font-size:120%">
+	4) Draw a rectangle: vertex1=(<input type="number" required>, <input type="number" required>), vertex2=(<input type="number" required>, <input type="number" required>)
+	<button type="submit">Draw</button>
+</form>
+<script type="text/javascript">
+	initDrawForm("rectangle", drawRectangle, 4, [side_length/2, side_length/2, side_length/4, side_length/10]);
+</script>
+<br>
+
+
+
+<form id="poly" style="font-size:120%">
+	5) Draw a <input type="radio" name="poly-type" value="polygon" checked> polygon
+		or <input type="radio" name="poly-type" value="polyline"> polyline:
+	<span id="poly-vertices">
+		<span> (<input type="number" required>, <input type="number" required>)</span>
+		<span> (<input type="number" required>, <input type="number" required>)</span>
+		<span> (<input type="number" required>, <input type="number" required>)</span>
+	</span>
+	<button id="add-poly-vertex" type="button">Add vertex</button>
+	<button id="remove-poly-vertex" type="button">Remove vertex</button>
+	<button type="submit">Draw</button>
+</form>
+<br>
+<br>
+<script type="text/javascript">
+	function drawPoly(xys) {
+		var isPolyline = ! document.querySelector("input[name=poly-type]").checked;
+		if (isPolyline) {
+			drawPolylines(xys);
+		}
+		else {
+			drawPolygon(xys);
+		}
+		return false;
+	}
+	initDrawForm("poly", drawPoly, -1, [0, 0, side_length/2, side_length/2, side_length/4, side_length/10]);
+
+	document.getElementById("add-poly-vertex").onclick = function(event) {
+		event.preventDefault();
+
+		var polyVertices = document.getElementById("poly-vertices");
+		var vertexInput = polyVertices.querySelector("span").cloneNode(true);
+		var numberInputs = vertexInput.querySelectorAll("input[type=number]")
+		for (var i = 0; i < numberInputs.length; i++) {
+			numberInputs[i].value = "";
+		}
+		polyVertices.appendChild(vertexInput);
+	};
+
+	document.getElementById("remove-poly-vertex").onclick = function(event) {
+		event.preventDefault();
+
+		var polyVertices = document.getElementById("poly-vertices");
+		var vertexInputs = polyVertices.querySelectorAll("span");
+		if (vertexInputs.length >= 4) {
+			polyVertices.removeChild(vertexInputs[vertexInputs.length-1]);
+		}
+		else {
+			alert("A polygon or polyline must have at least 3 vertices.")
+		}
+	};
+
+
+</script>
+</body>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<head>
+<title>Yang Meng - Programming Assignment 1 - COMP.5460 Computer Graphics I, Spring 2018</title>
+
+<!--
+
+Titile:	COMP.5460 Programming Assignment 1
+Author:	Yang Meng
+StuID: 	01679623
+Email: 	Yang_Meng@student.uml.edu
+
+-->
+<style type="text/css">
+body{
+	font-family: sans-serif;
+}
+
+canvas{
+	margin-bottom: 1em;
+	border: 1px solid red;
+}
+label{
+	display: inline-block;
+    text-align: center;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+}
+
+fieldset {
+	display: inline-block;
+}
+
+#convas {
+  <!--border: 1px solid red;-->
+  margin: 0px auto;
+  text-align: center;
+}
+</style>
+
+</head>
+
+<body>
+<p style="font-weight: bold; text-align:center; font-size:150%" >Yang Meng - Programming Assignment 1 - COMP.5460 Computer Graphics I (Spring 2018)</p>
+<br>
+
+<p style="font-size:120%">This page is the Interactive Version.
+(<span>Go back to <a href="hw1.html">Non-Interactive Version</a> page</span>)</p>
+<br><br>
+
+
+
+<div id="convas">
+<canvas id="c" style="background-color: #e0f1ff"></canvas>
+</div>
+
+<script src="canvas.js"></script>
+<script src="line.js"></script>
+<script src="circle.js"></script>
+<script src="ellipse.js"></script>
+<script src="rectangle.js"></script>
+<script src="poly.js"></script>
+
+<form id="interactive" style="font-size:120%">
+	<fieldset>
+		<div>
+			Click and drag on canvas to draw:
+			<label><input type="radio" name="type" value="line" checked><br>line</label>
+			<label><input type="radio" name="type" value="circle"><br>circle</label>
+			<label><input type="radio" name="type" value="ellipse"><br>ellipse</label>
+			<label><input type="radio" name="type" value="rectangle"><br>rectangle</label>
+		</div>
+		<hr style="color: lightgray">
+		<div>
+		Click on canvas multiple times to draw:
+			<label><input type="radio" name="type" value="polygon"><br>polygon<br></label>
+			<label><input type="radio" name="type" value="polyline"><br>polyline</label>
+		</div>
+		<br>
+		<div>
+			(Click the 1st vertex after you have at least a triangle to close the polygon.)<br>
+			(To finish a polyline, you just press the "Esc" button.)
+		</div>
+	</fieldset>
+</form>
+<br><br>
+
+<script type="text/javascript">
+	var mousedownx;
+	var mousedowny;
+	var ismousedown = false;
+
+	function getRelX(event) {
+		return event.clientX - canvas.getBoundingClientRect().left;
+	}
+	function getRelY(event) {
+		return event.clientY - canvas.getBoundingClientRect().top;
+	}
+
+
+	// mouse events for non-poly
+
+	var nonPolyOnmousedown = function (event) {
+		clearCanvas();
+		mousedownx = getRelX(event);
+		mousedowny = getRelY(event);
+		ismousedown = true;
+	}
+	var nonPolyOnmousemove = function (event) {
+		if (ismousedown) {
+			var mousemovex = getRelX(event);
+			var mousemovey = getRelY(event);
+
+			clearCanvas();
+
+			var checked = document.querySelector("input:checked").value;
+			if (checked == "line") {
+				midpointLine(mousedownx, mousedowny, mousemovex, mousemovey);
+			}
+			else if (checked == "circle") {
+				var xc = (mousedownx + mousemovex) / 2;
+				var yc = (mousedowny + mousemovey) / 2;
+				var r = Math.sqrt( (mousedownx-mousemovex)*(mousedownx-mousemovex) + (mousedowny-mousemovey)* (mousedowny-mousemovey)) / 2;
+				midpointCircle(xc, yc, r);
+			}
+			else if (checked == "ellipse") {
+				var xc = (mousedownx + mousemovex) / 2;
+				var yc = (mousedowny + mousemovey) / 2;
+				var rx = Math.abs(mousedownx - mousemovex) / 2;
+				var ry = Math.abs(mousedowny - mousemovey) / 2;
+				console.log(xc, yc, rx, ry);
+				midpointEllipse(xc, yc, rx, ry);
+			}
+			else if (checked == "rectangle") {
+				drawRectangle(mousedownx, mousedowny, mousemovex, mousemovey);
+			}
+		}
+	}
+	var nonPolyOnmouseup = function (event) {
+		ismousedown = false;
+	}
+
+	var inputs = document.getElementsByTagName("input");
+	for (var i = 0; i < inputs.length - 2; i++) {
+		inputs[i].onchange = function () {
+			clearCanvas();
+			canvas.onmousedown = nonPolyOnmousedown;
+			canvas.onmousemove = nonPolyOnmousemove;
+			canvas.onmouseup = nonPolyOnmouseup;
+		}
+	}
+
+	// mouse events for poly-
+
+	var vertices = []
+	var isEnd = false;
+
+	var closeOffset = 5;
+
+	var isWithinCloseOffset = function (x, y) {
+		var firstVertex = vertices[0];
+		return x <= firstVertex[0] + closeOffset && x>= firstVertex[0] - closeOffset
+			&& y <= firstVertex[1] + closeOffset && y >= firstVertex[1] - closeOffset
+	}
+
+	var resetPoly = function () {
+		clearCanvas();
+		vertices = [];
+		isEnd = false;
+	}
+
+	var polyOnmousedown = function (event) {
+		var mousedownx = getRelX(event);
+		var mousedowny = getRelY(event);
+
+		if (!isEnd) {
+			if(document.querySelector("input:checked").value == "polygon" && vertices.length > 2 && isWithinCloseOffset(mousedownx, mousedowny)) {
+				isEnd = true;
+
+				drawExistingPolygon();
+			}
+		}
+		else {
+			resetPoly();
+		}
+
+		if (!isEnd) {
+			vertices.push([mousedownx, mousedowny]);
+		}
+	}
+	var drawExistingPolygon = function() {
+		drawExistingPolyline();
+		midpointLine(vertices[0][0], vertices[0][1], vertices[vertices.length-1][0], vertices[vertices.length-1][1]);
+	}
+
+	var drawExistingPolyline = function () {
+	    	clearCanvas();
+
+	    	prevVertex = vertices[vertices.length - 1];
+			for (var i = vertices.length - 2; i >= 0; i--) {
+				currVertex = vertices[i];
+				midpointLine(prevVertex[0], prevVertex[1], currVertex[0], currVertex[1]);
+				prevVertex = currVertex;
+			}
+	}
+	var polyOnmousemove = function (event) {
+		if (!isEnd) {
+			var mousemovex = getRelX(event);
+			var mousemovey = getRelY(event);
+			// console.log("move", mousemovex, mousemovey);
+
+			clearCanvas();
+			var prevVertex = [mousemovex, mousemovey];
+			for (var i = vertices.length - 1; i >= 0; i--) {
+				currVertex = vertices[i];
+				midpointLine(prevVertex[0], prevVertex[1], currVertex[0], currVertex[1]);
+				prevVertex = currVertex;
+			}
+		}
+
+	}
+
+	for (var i = inputs.length - 2; i < inputs.length; i++) {
+		if (i < 4) {}
+		inputs[i].onchange = function () {
+			resetPoly();
+			canvas.onmousedown = polyOnmousedown;
+			canvas.onmousemove = polyOnmousemove;
+		}
+	}
+
+	document.onkeydown = function(evt) {
+		// end polyline on esc
+	    evt = evt || window.event;
+	    if (evt.keyCode == 27 && document.querySelector("input:checked").value == "polyline") {
+	    	isEnd = true;
+	    	drawExistingPolyline();
+	    }
+	};
+
+
+	document.querySelector("input:checked").onchange();
+</script>
+
+</body>
