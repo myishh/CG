@@ -5,6 +5,5 @@ I have finished the 1st programming assignment. Among the all files, "hw1.html" 
 
 ## **Reference**
 
-1) [ellipse algorithm paper1](http://www.eazynotes.com/notes/computer-graphics/algorithms/mid-point-elliplse-algorithm.pdf)
-2) [ellipse algorithm paper2](http://winnyefanho.net/research/MEA.pdf)
-3) [Bresenham midpoint line algorithm]( http://en.wikipedia.org/wiki/Midpoint_circle_algorithm)
+1) [ellipse algorithm paper](http://www.eazynotes.com/notes/computer-graphics/algorithms/mid-point-elliplse-algorithm.pdf)
+2) [Bresenham midpoint line algorithm]( http://en.wikipedia.org/wiki/Midpoint_circle_algorithm)
