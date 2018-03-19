@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<!--
+
+Titile: COMP.5460 Programming Assignment 2
+Author: Yang Meng
+StuID:  01679623
+Email:  Yang_Meng@student.uml.edu
+
+-->
+<title>Yang Meng - Programming Assignment 2 - COMP.5460 Computer Graphics I, Spring 2018</title>
+    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+    <style> 
+		body {
+			padding: 0; margin: 0;
+		}
+		
+		canvas{
+			border: 1px solid red;
+			background-color: #ffffff;
+		  padding-left: 0;
+      padding-right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+		}
+	
+	
+	</style>
+ 
+		
+	
+  </head>
+  <body>
+<p style="font-weight: bold; text-align:center; font-size:150%" >Programming Assignment 2 - COMP.5460 Computer Graphics I (Spring 2018)</p>
+<p style="font-weight: bold; text-align:center;font-size:120%">Name: Yang Meng</p>
+<p style="font-weight: bold; text-align:center;font-size:120%">ID: 01679623</p>
+<p style="font-weight: bold; text-align:center;font-size:120%">Email: Yang_Meng@student.uml.edu</p>
+<br><br>
+
+
+
+
+
+
+  <div>
+	<canvas id="canvas1">Your browser does not support canvas element.</canvas></br>
+  </div>  
+  
+
+  	<script src="canvas.js"></script>
+  
+
+  <div>
+	<p id="paragraph_1"></p>
+  </div>
+<!--
+  <form>
+    <input name="点击我" type="button" value="点击我" onclick="openwin()"/>
+  </form>
+-->
+
+<!--
+这是获取网页input值的方法之一，给form一个名字然后在JavaScript的地方就可以用form的名字来调用form表单里input元素的value属性可以得到值(myform.xValue.value)，并把值赋给a，最后用JavaScript的alert()打印方法打印出来。 
+-->
+
+<!-- 
+  <form name="myform">  
+   	<input type="number" name="xValue" id="formX" required/>
+   	<input type="number" name="yValue" id="formY" maxlength="6" required/>
+   	<input type="number" name="radiusValue" id="formR" maxlength="10" required/>
+  </form>  
+
+   	<input type="button" name="button" value="Draw circle(1st method)" onclick="printf1()" />  --> 
+ <!--<button onclick="printf2()">Draw circle(2nd method)</button>-->
+
+<!--    	
+	<input type="button" name="button" value="Draw circle(2nd method)" onclick="printf2()" />
+
+	<input type="button" name="button" value="set value" onclick="set()" />
+ -->
+
+<!--Change the color-->
+<form id="fill">
+  Line color:
+  <input id="strokeStyleSelect" type="color" onchange="changeFill()" value="#000000" required/>
+  <!-- <input type="button" name="button" value="" onclick="changeFill()"> -->
+  <span style="display:inline-block; width: 20px;"></span>
+  Line width:
+  <input type="number" onchange="changeLineWidth()" value="1" min="1" maxlength="4 " required />
+  <span style="display:inline-block; width: 20px;"></span>
+  Line Join:
+  <select id="lineJoin" onchange="changeLineJoin()">
+    <option value="1">round</option>
+    <option value="2">bevel</option>
+    <option value="3">miter</option>  
+
+  </select>
+  <br>  <br>
+  <hr>
+
+  <h3>
+Problem 1 -- Draw Fractal
+</h3>
+<p>Directions:</p>
+<p>1)Choose the primitive.</p>
+<p>2)Input ratio & iteration. Both of them should be integers.</p>
+<p>3)Click the button "Draw Fractal" to show the result.</p>
+
+    Primitive:
+<select id='inputPrimitive'>
+<option value='line' selected>line</option>
+<option value='polyline'>polyline</option>
+<option value='polygon'>polygon</option>
+<option value='rectangle'>rectangle</option>
+<option value='circle'>circle</option>
+<option value='ellipse'>ellipse</option>
+</select>
+  <form id="prob1">
+    
+    <!-- <span style="display:inline-block; width: 16px;"></span> -->
+    Ratio: 1/
+    <input type="number" id="ratio" name="ratio" value="3" min="1"/> 
+    <span style="display:inline-block; width: 16px;"></span>
+    Iteration:
+    <input type="number" id="iterations" name="iterations" value="1" min="0"/>   
+
+
+  </form>
+    </br>
+
+  <button onclick="drawFractal(event)">Draw Fractal</button>
+  <button onclick="clearCanvas()">Clear Canvas</button>
+  <br> <br> <br> 
+   <hr>
+
+  <!-- <input type="button" name="button" value="" onclick="changeLineWidth()"> -->
+<!-- <button onclick="changeFill()">Click here to change color</button> -->
+<!--Change the color-->
+</form>
+
+
+<h3>
+Problem 2 -- Wheel Design
+</h3>
+<p>Directions:</p>
+<p>1)Input radius & score. Both of them should be numbers.</p>
+<p>2)Click the button "Draw Wheel" to show the wheel.</p>
+<form id="p2">
+</br>
+  Radius:
+  <input type="number" name="radius" value="200" min="0" max="300" required/>
+  <span style="display:inline-block; width: 10px;"></span>
+  Score:
+  <input type="number" name="score" value="100" min="0" max="100" required/>
+  <!-- <input type="button" name="button" value="Draw Circle" onclick="drawCircle()" />
+  <input type="button" name="button" value="Draw Polygon" onclick="drawPolygon()" />
+  <input type="button" name="button" value="Draw Ellipse" onclick="drawEllipse()" />
+ -->
+  <span style="display:inline-block; width: 10px;"></span>
+<!--   Driver Type:
+  <select id="driver" onchange="changeScore()">
+    <option value="1" selected="selected">Perfect Driver</option>
+    <option value="2">First Offender</option>
+    <option value="3">Subsequent Offender</option>
+
+  </select> -->
+</form>
+  </br>
+<!--  <button onclick="drawCircle()">Draw Circle</button>
+  <button onclick="drawPolygon()">Draw Polygon</button>
+  <button onclick="drawEllipse()">Draw Ellipse</button>
+ -->  
+  <!-- <button onclick="offend()">Show Wheel</button> -->
+  <button onclick="drawWheel()">Draw Wheel</button>
+  <button onclick="clearCanvas()">Clear Canvas</button>
+  
+  <p id="prompt_1"></p>
+
+
+
+  </body>
+</html>
