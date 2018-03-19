@@ -2,6 +2,7 @@ COMP.5460 Computer Graphics I (Spring 2018)
 Programming Assignment 2: 2D Drawing
 
 Name:	Yang Meng
+StuID:	01679623
 Email:	Yang_Meng@student.uml.edu
 
 Among the all files, "hw2.html" is the main file. In this programming assignment, I have implemented the interface that requires entering numerical parameters.
@@ -12,3 +13,4 @@ For the problem 2, first of all, input the radius value and drive's score, then 
 ##**Reference**
 
 1) [html5: learning the canvas by iteration](http://blakesmith.me/2010/04/10/html5-learning-the-canvas-by-iteration.html)
+2) [How to Generate Mandelbrot Set Fractals in JavaScript](https://progur.com/2017/02/create-mandelbrot-fractal-javascript.html)
