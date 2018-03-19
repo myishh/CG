@@ -1,4 +1,4 @@
-***COMP.5460 Computer Graphics I (Spring 2018)
+COMP.5460 Computer Graphics I (Spring 2018)
 Programming Assignment 2: 2D Drawing
 
 Name:	Yang Meng
