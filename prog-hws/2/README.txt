@@ -2,7 +2,6 @@ COMP.5460 Computer Graphics I (Spring 2018)
 Programming Assignment 2: 2D Drawing
 
 Name:	Yang Meng
-StuID:	01679623
 Email:	Yang_Meng@student.uml.edu
 
 Among the all files, "hw2.html" is the main file. In this programming assignment, I have implemented the interface that requires entering numerical parameters.
