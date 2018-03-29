@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+	<style>
+		body { 
+			font-family: sans-serif 
+		}
+
+
+		form section { 
+			margin-bottom: 1em 
+		}
+		
+		fieldset {
+			padding: 0.2em 0.5em; 
+			display: inline-block; 
+			background-color: #e0f1ff; 
+			vertical-align: top;
+    		-webkit-border-radius: 2px;
+    		-moz-border-radius: 2px;
+    		border-radius: 5px;
+
+    		font-family: sans-serif;
+		    border: 2px solid #1F497D;
+		    background: #e0f1ff;
+		    padding: 4px;
+
+		}
+		fieldset.has-2-line-labels label { 
+			display: inline-block; 
+			text-align: center; 
+
+		}
+
+		fieldset legend {
+		    padding: 0.2em 0.5em;
+
+		    color: #000080;
+		    font-size:100%;
+		    text-align:center;
+		    -webkit-border-radius: 2px;
+		    -moz-border-radius: 2px;
+		    border-radius: 2px;
+
+		    background: #1F497D;
+		    color: #fff;
+		    padding: 5px 5px ;
+		    box-shadow: 0 0 0 5px #1F497D;
+		    
+		}
+		legend{
+		    border:5px solid #1F497D;			
+		}
+
+		input[type=number] { 
+			max-width: 4em 
+		}
+		
+		fieldset#transformation-type label { 
+			display: inline-block; 
+			text-align: center; 
+		}
+
+	</style>
+
+
+</head>
+<body>
+
+<h2 align="center">Yang Meng -- COMP.5460 Computer Graphics I, Spring 2018</h2>
+<h2 align="center" style="font-size: large">Final Project -- Week 1</h2>
+<!--
+<p> My implementation this week:</p>
+<p> 1) Three 2D elevations of a house, which include front, top and side.</p>
+<p> 2) 3D transformations to the house.</p>
+<hr>
+-->
+<div align="center">
+<svg id="canvas" style="border: solid #1F497D 2px; background-color: #e0f1ff"; xmlns="http://www.w3.org/2000/svg" ></svg>
+	
+</div>
+
+
+
+<form>
+	<section>
+		<fieldset>
+			<legend>House Building</legend>
+			<div style="padding:5px 5px"></div>
+			<label>width=<input type="number" name="width" required value="100"></label>
+			<span style="width: 50px;"></span>
+			<span style="width: 50px;"></span>
+			<label>height=<input type="number" name="height" required value="100"></label>,
+			<label>depth=<input type="number" name="depth" required value="100"></label>
+			<button type="submit">Build</button>
+		</fieldset>
+	</section>
+
+	
+	<section id="transformations">
+		<fieldset>
+			<legend>Transform The House (inputting)</legend>
+			<div style="color: #000000; margin-bottom: 0.5em; padding:10px 5px;">
+				Direction: transform the house by inputting coordinates.<br>
+			</div>
+
+		<fieldset>
+			<legend>Transform Front</legend>
+			<div style="padding:5px 5px"></div>
+			Translation: <label>x=<input type="number" value="0"></label>, <label>y=<input type="number" value="10"></label><br>
+			<label>Rotation: <input type="number" value="0"></label>
+			<br>
+			<label>Scaling: <input type="number" step="0.01" value="0.7"></label><br>
+			Shearing: <label>x=<input type="number" step="0.01" value="-1"></label>, <label>y=<input type="number" step="0.01" value="-0.2"></label><br>
+			<button type="submit">Transform</button>
+			<div style="padding:5px 5px"></div>
+		</fieldset>
+
+		<fieldset>
+			<legend>Transform Side</legend>
+			<div style="padding:5px 5px"></div>
+			Translation: <label>x=<input type="number" value="10"></label>, <label>y=<input type="number" value="10"></label><br>
+			<label>Rotation: <input type="number" value="0"></label>
+			<br>
+			<label>Scaling: <input type="number" step="0.01" value="0.7"></label><br>
+			Shearing: <label>x=<input type="number" step="0.01" value="-1"></label>, <label>y=<input type="number" step="0.01" value="-0.2"></label><br>
+			<button type="submit">Transform</button>
+			<div style="padding:5px 5px"></div>
+		</fieldset>
+
+		<fieldset>
+			<legend>Transform Top</legend>
+			<div style="padding:5px 5px"></div>
+			Translation: <label>x=<input type="number" value="10"></label>, <label>y=<input type="number" value="10"></label><br>
+			<label>Rotation: <input type="number" value="0"></label>
+			<br>
+			<label>Scaling: <input type="number" step="0.01" value="0.7"></label><br>
+			Shearing: <label>x=<input type="number" step="0.01" value="-1"></label>, <label>y=<input type="number" step="0.01" value="-0.2"></label><br>
+			<button type="submit">Transform</button>
+			<div style="padding:5px 5px"></div>
+		</fieldset>
+		</fieldset>
+	</section>
+
+	<section>
+		<fieldset>
+			<legend>Transform The House (dragging)</legend>
+			<div style="padding:5px 5px"></div>
+
+			<div style="color: black; margin-bottom: 0.5em;padding: 5px 5px;">
+				Direction: transform the house by dragging your mouse on canvas.<br>
+			</div>
+
+			<div style="padding:5px 5px"></div>
+			<fieldset id="elevation-type">
+				<legend>Select one elevation</legend>
+				<div style="padding:5px 5px"></div>
+				<label><input type="radio" name="elevation" checked> Front</label>
+				<label><input type="radio" name="elevation"> Side</label>
+				
+				<label><input type="radio" name="elevation"> Top</label>
+				<div style="padding:5px 5px"></div>
+			</fieldset>
+
+			<fieldset id="transformation-type">
+				<legend>Decide transformation type</legend>
+				<div style="padding:5px 5px"></div>
+				<label><input type="radio" name="transform" checked><br>Translate</label>
+				<label><input type="radio" name="transform"><br>Rotate</label>
+				<label><input type="radio" name="transform"><br>Scale</label>
+				<label><input type="radio" name="transform"><br>Shear</label>
+			</fieldset>
+		</fieldset>
+	</section>
+</form>
+
+
+<script src="js/Angle.js"></script>
+<script src="js/Vertex3D.js"></script>
+<script src="js/Matrix.js"></script>
+<script src="js/Transformable.js"></script>
+<script src="js/Face.js"></script>
+<script src="js/House.js"></script>
+
+<script src="ui/Inputs.js"></script>
+<script src="ui/RadioButton.js"></script>
+<script src="ui/TransformFieldset.js"></script>
+<script src="ui/CanvasManipulation.js"></script>
+
+<script src="finalProject.js"></script>
+
+</body>
+</html>
