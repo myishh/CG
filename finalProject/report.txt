@@ -1,0 +1,8 @@
+COMP.5460 Computer Graphics Final project manual week 1
+Date:	Mar 28 2018
+Name: 	Yang Meng
+Email: 	Yang_Meng@student.uml.edu
+
+During the 1st week, I have done such work.
+1) Learn how to create a 3D house by drawing three 2D elevations. To do so, just need to input the house data, such as width, height and depth of the house.
+2) Implement the 3D transformations to the house. For this part, I figure out 2 approaches, one way is input detailed value of each elevation. Another way is dragging the house after deciding the elevation and transformation type.

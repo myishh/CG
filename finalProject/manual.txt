@@ -1,0 +1,9 @@
+COMP.5460 Computer Graphics Final project manual week 1
+Date:	Mar 28 2018
+Name: 	Yang Meng
+Email: 	Yang_Meng@student.uml.edu
+
+Instructions:
+1) Build a house. Input the width, height and depth value, then click the "build" button.
+2) Transform the house by inputing. There are 3 parts, transform font, transform side and transform top. For each part, input values of all the parameters then click "Transform" button to get the result.
+3) Transform the house by dragging. First, select which elevation to transform, then choose transformation type to. Then drag mouse on the canvas to implement the transformation.
