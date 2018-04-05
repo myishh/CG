@@ -1,0 +1,9 @@
+COMP.5460 Computer Graphics Final project manual week 2
+Date:	Apr 04 2018
+Name: 	Yang Meng
+Email: 	Yang_Meng@student.uml.edu
+
+For the 2nd week, I have finished such work:
+1) Implement the 3D transformations to the house by inputting the house coordinates. To achieve the transformation, we need the translation coordinates(x & y), rotation, scaling rate and shearing coordinates(x & y). By using those data, I set up the interface to transfrom font elevations, side elevation and the top elevation.
+
+2)Implement the transformation by dragging the mouse on canvas. For this part, front elevation, side elevation and top elevation, all those 3 elevation could be transformed by translation, rotation, scaling and shearing.
