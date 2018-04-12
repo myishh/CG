@@ -1,0 +1,273 @@
+<!--
+
+ COMP.5460 Computer Graphics I --- Spring 2018 --- Final Project
+ Week 3
+
+ Name: Yang Meng
+ Email: Yang_Meng@student.uml.edu
+
+-->
+<!DOCTYPE html>
+<html class="no-js" lang="">
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>COMP.5460 Computer Graphics I -- Spring 2018 -- Final Project</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="js/math4D.js"></script>
+    <script src="js/math.js"></script>
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+    <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+
+</head>
+<body>
+<p align="center" style="font-size: 120%;word-spacing: -0.1em;">Yang Meng -- COMP.5460 Computer Graphics I, Spring 2018
+
+</p>
+<p align="center">Final Project -- Week 3
+    (<a target="_blank" href="README.txt">README</a>)
+    (<a target="_blank" href="manual.txt">MANUAL</a>)
+    (<a target="_blank" href="report.txt">REPORT</a>)
+</p>
+
+<div id="container">
+
+    <nav>
+        <div class="dropdown">
+            <button id="drop_btn" class="dropbtn">Select View</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a id="orthoView">Orthographic</a>
+                <a id="axonView">Axonometric</a>
+                <a id="obliqView">Oblique</a>
+                <!--
+
+
+                <a id="1vanishView">1-Vanishing</a>
+                <a id="2vanishView">2-Vanishing</a>
+                <a id="3vanishView">3-Vanishing</a>-->
+            </div>
+        </div>
+
+
+        <div id="transformControls" class="trasform_controls">
+
+
+            <ul class="transform-list">
+
+                <li>
+                    <label class="transform-label" for="TranslateX">TranslateX:</label>
+                    <div class="val-slider">
+                        <div id="transX-val" class="val-box">
+                            0
+                        </div>
+
+                        <input class="slider" type="range" name="TranslateX" step="0.01" id="TranslateX" value="0"
+                               min="-180" max="180">
+                    </div>
+                </li>
+
+
+                <li>
+                    <label class="transform-label" for="TranslateY">TranslateY:</label>
+                    <div class="val-slider">
+                        <div id="transY-val" class="val-box">
+                            0
+                        </div>
+
+                        <input class="slider" type="range" name="TranslateY" step="0.01" id="TranslateY" value="0"
+                               min="-180"
+                               max="180">
+                    </div>
+                </li>
+
+                <li>
+                    <label class="transform-label" for="TranslateZ">TranslateZ:</label>
+                    <div class="val-slider">
+                        <div id="transZ-val" class="val-box">
+                            0
+                        </div>
+
+                        <input class="slider" type="range" name="TranslateZ" step="0.01" id="TranslateZ" value="0"
+                               min="-180"
+                               max="180">
+                    </div>
+                </li>
+
+
+                <li>
+                    <label class="transform-label" for="RotationAngle">Rotate Angle:</label>
+                    <form>
+                        <label>
+                            <input type="radio" name="rotate_axis" value="Xaxis" checked>
+                            X
+                        </label>
+                        <label>
+                            <input type="radio" name="rotate_axis" value="Yaxis">
+                            Y
+                        </label>
+                        <label>
+                            <input type="radio" name="rotate_axis" value="Zaxis">
+                            Z
+                        </label>
+                    </form>
+                    <div class="val-slider">
+                        <div id="rotate-val" class="val-box val-angle">
+                            0
+                        </div>
+                        <input class="slider" type="range" name="RotationAngle" id="RotationAngle" value="0" min="-360"
+                               max="360" step="0.01">
+                    </div>
+                </li>
+<!--
+                <li>
+                    <label class="transform-label" for="ScaleX">ScaleX:</label>
+                    <div class="val-slider">
+                        <div id="scale-val" class="val-box">
+                            1
+                        </div>
+                        <input class="slider" type="range" name="ScaleX" id="ScaleX" step="0.01" value="1" min="-4"
+                               max="4">
+                    </div>
+                </li>
+
+
+                <li>
+                    <label class="transform-label" for="ScaleY">ScaleY:</label>
+                    <div class="val-slider">
+                        <div id="scaleY-val" class="val-box">
+                            1
+                        </div>
+                        <input class="slider" type="range" name="ScaleY" id="ScaleY" step="0.01" value="1" min="-4"
+                               max="4">
+                    </div>
+                </li>
+
+                <li>
+                    <label class="transform-label" for="ScaleZ">ScaleZ:</label>
+                    <div class="val-slider">
+                        <div id="scaleZ-val" class="val-box">
+                            1
+                        </div>
+                        <input class="slider" type="range" name="ScaleZ" id="ScaleZ" step="0.01" value="1" min="-4"
+                               max="4">
+                    </div>
+                </li>
+
+
+                <li>
+                    <label class="transform-label" for="ShearingXAngle">ShearX Angle:</label>
+                    <div class="val-slider">
+                        <div id="shearX-val" class="val-box shear-angle">
+                            0
+                        </div>
+                        <input class="slider" type="range" name="ShearingXAngle" id="ShearingXAngle" value="0"
+                               min="-89"
+                               max="89" step="0.01">
+                    </div>
+
+                </li>
+
+
+                <li>
+                    <label class="transform-label" for="ShearingYAngle">ShearY Angle:</label>
+                    <div class="val-slider">
+                        <div id="shearY-val" class="val-box shear-angle">
+                            0
+                        </div>
+                        <input class="slider" type="range" name="ShearingYAngle" id="ShearingYAngle" value="0"
+                               min="-89"
+                               max="89" step="0.01">
+                    </div>
+
+                </li>
+
+-->
+            </ul>
+
+
+        </div>
+
+
+    </nav>
+
+    <article>
+
+        <!--<button id="start_transformsbtn" class="kc_fab_main_btn">Start Transforms</button>-->
+        <button id="reset_transformsbtn" class="kc_fab_main_btn">RESET</button>
+
+
+        <canvas id="canvas"></canvas>
+
+
+    </article>
+
+
+</div>
+
+<!-- vertex shader -->
+<script id="3d-vertex-shader" type="x-shader/x-vertex">
+attribute vec4 a_position;
+
+attribute vec2 a_texcoord;
+varying vec2 v_texcoord;
+
+
+uniform mat4 u_matrix;
+
+
+
+void main() {
+  // Multiply the position by the matrix.
+  gl_Position = u_matrix * a_position;
+
+    v_texcoord = a_texcoord;
+  // Pass the color to the fragment shader.
+ // v_color = a_color;
+}
+
+
+
+</script>
+
+
+<!-- fragment shader -->
+<script id="3d-fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+// Passed in from the vertex shader.
+varying vec2 v_texcoord;
+
+// The texture.
+uniform sampler2D u_texture;
+
+
+
+void main() {
+   gl_FragColor =  texture2D(u_texture, v_texcoord);
+}
+
+
+
+</script>
+
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+
+
+</body>
+</html>
+

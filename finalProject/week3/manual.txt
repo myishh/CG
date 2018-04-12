@@ -1,0 +1,9 @@
+COMP.5460 Computer Graphics Final project manual week 3
+
+Name: 	Yang Meng
+Email: 	Yang_Meng@student.uml.edu
+
+Instructions:
+1) First, Open the main html file "index.html"
+2) Then, select one view from the navigation bar, which includes orthographic, axonomertric and oblique.
+3) After doing the selection, you could do the 3D translation or 3D rotation for each of those view by sliding the range slider. When you are doing the sliding, the translation result will show up on the canvas immediately.

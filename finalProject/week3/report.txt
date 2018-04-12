@@ -1,0 +1,8 @@
+COMP.5460 Computer Graphics Final project manual week 3
+Date:	Apr 11 2018
+Name: 	Yang Meng
+Email: 	Yang_Meng@student.uml.edu
+
+For the 3rd week, I have done such work:
+1) View the house from multiple views: Orthographic, Axonometric, and Oblique.
+2) Implement the 3D translation and 3D rotation in each view by sliding the range slider in the navigation bar.
