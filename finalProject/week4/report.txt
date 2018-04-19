@@ -1,0 +1,8 @@
+COMP.5460 Computer Graphics Final project manual week 4
+Date:	Apr 18 2018
+Name: 	Yang Meng
+Email: 	Yang_Meng@student.uml.edu
+
+For the 4th week, I have done such work:
+1) Implement 3D scaling and 3D shearing for each of those projections: Orthographic, Axonometric, and Oblique.
+2) Add light transformation to the object.
