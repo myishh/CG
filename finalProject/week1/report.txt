@@ -1,9 +1,0 @@
-COMP.5460 Computer Graphics Final project manual week 1
-Date:	Mar 28 2018
-Name: 	Yang Meng
-Email: 	Yang_Meng@student.uml.edu
-
-For the 1st week, I have done such work:
-1) Set up html interface, which consists of three parts: SVG, house building, house transforming. For the house building and house transforming parts, I decide to use from and fieldset to store and submit the data of the house.
-2) Learn the algorithms to create a 3D house by drawing three 2D elevations. To implement the drawing, need to input the house data, such as width, height and depth of the house. Then, based on such data, a simple house could be drawn out and show up on the canvas.
-3) Implement the 3D transformations to the house by inputting the house coordinates. To achieve the transformation, we need the translation coordinates(x & y), rotation, scaling rate and shearing coordinates(x & y). By using those data, I set up the interface to transfrom font elevations, side elevation and the top elevation.
