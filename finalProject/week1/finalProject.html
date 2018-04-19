@@ -1,0 +1,190 @@
+<html>
+<head>
+	<style>
+		body { font-family: sans-serif }
+		form section { margin-bottom: 1em }
+		input[type=number] { max-width: 4em }
+		fieldset#transformation-type label {
+			display: inline-block;
+			text-align: center;
+		}
+
+
+		fieldset {
+			padding: 0.2em 0.5em; 
+			display: inline-block; 
+			background-color: #e0f1ff; 
+			vertical-align: top;
+    		-webkit-border-radius: 2px;
+    		-moz-border-radius: 2px;
+    		border-radius: 5px;
+
+    		font-family: sans-serif;
+		    border: 2px solid #1F497D;
+		    background: #e0f1ff;
+		    padding: 4px;
+
+		}
+		fieldset.has-2-line-labels label { 
+			display: inline-block; 
+			text-align: center; 
+
+		}
+
+		fieldset legend {
+		    padding: 0.2em 0.5em;
+
+		    color: #000080;
+		    font-size:100%;
+		    text-align:center;
+		    -webkit-border-radius: 2px;
+		    -moz-border-radius: 2px;
+		    border-radius: 2px;
+
+		    background: #1F497D;
+		    color: #fff;
+		    padding: 5px 5px ;
+		    box-shadow: 0 0 0 5px #1F497D;
+		    
+		}
+		legend{
+		    border:5px solid #1F497D;			
+		}
+
+
+		.button {
+		  border-radius: 4px;
+		  background-color: #1F497D;
+		  border: none;
+		  color: #FFFFFF;
+		  text-align: center;
+		  font-size: 16px;
+		  padding: 5px;
+		  width: 120px;
+		  transition: all 0.5s;
+		  cursor: pointer;
+		  margin: 5px;
+		}
+
+		.button span {
+		  cursor: pointer;
+		  display: inline-block;
+		  position: relative;
+		  transition: 0.5s;
+		}
+
+		.button span:after {
+		  content: '\00bb';
+		  position: absolute;
+		  opacity: 0;
+		  top: 0;
+		  right: -20px;
+		  transition: 0.5s;
+		}
+
+		.button:hover span {
+		  padding-right: 25px;
+		}
+
+		.button:hover span:after {
+		  opacity: 1;
+		  right: 0;
+		}
+
+
+	</style>
+</head>
+<body>
+
+<p align="center" style="font-size: 150%">Yang Meng -- COMP.5460 Computer Graphics I, Spring 2018</p>
+<p align="center" style="font-size: large">Final Project -- Week 1 </p>
+
+<svg align="center" id="canvas" style="border: solid #1F497D 2px; background-color: #e0f1ff; display: block; margin: auto" xmlns="http://www.w3.org/2000/svg"></svg>
+
+<br>
+
+<form>
+	<!--
+	This section provides the interface to build a house by inputing
+	the detailed parameters of one single house. Parameters include
+	width, height and depth.
+e	-->
+<p align="center" style="font-size: large">1) To build a house, click button "Build" after entering the width, height and depth</p>
+	<section align="center">
+		<fieldset>
+			<legend>House Size Info</legend>
+			<label>width=<input type="number" name="width" required value="125"></label>,
+			<label>height=<input type="number" name="height" required value="125"></label>,
+			<label>depth=<input type="number" name="depth" required value="150"></label>
+			<button class="button" type="submit"><span>Build</span></button>
+		</fieldset>
+	</section>
+
+
+	<!--
+	This section provides the interface for the inputting transformation
+	Transformation could be done by inputting the parameter and click the
+	button "transform"
+	-->
+	<p align="center" style="font-size: large">2) To transform the house, click button "Transform" after entering all the parameters</p>
+	<section id="transformations" align="center" >
+		<fieldset>
+			<legend>Transform Front</legend>
+			Translation: <label>x=<input type="number" value="0"></label>, <label>y=<input type="number" value="0"></label><br>
+			<label>Rotation: <input type="number" value="0"></label><br>
+			<label>Scaling: <input type="number" step="0.01" value="0.85"></label><br>
+			Shearing: <label>x=<input type="number" step="0.01" value="0"></label>, <label>y=<input type="number" step="0.01" value="-0.0"></label><br>
+			<button class="button" type="submit"><span>Transform</span></button>
+		</fieldset>
+
+		<fieldset>
+			<legend>Transform Side</legend>
+			Translation: <label>x=<input type="number" value="-20"></label>, <label>y=<input type="number" value="10"></label><br>
+			<label>Rotation: <input type="number" value="10"></label><br>
+			<label>Scaling: <input type="number" step="0.01" value="0.75"></label><br>
+			Shearing: <label>x=<input type="number" step="0.01" value="-1"></label>, <label>y=<input type="number" step="0.01" value="-0.2"></label><br>
+			<button class="button" type="submit"><span>Transform</span></button>
+		</fieldset>
+
+		<fieldset>
+			<legend>Transform Top</legend>
+			Translation: <label>x=<input type="number" value="10"></label>, <label>y=<input type="number" value="10"></label><br>
+			<label>Rotation: <input type="number" value="10"></label><br>
+			<label>Scaling: <input type="number" step="0.01" value="0.70"></label><br>
+			Shearing: <label>x=<input type="number" step="0.01" value="-1"></label>, <label>y=<input type="number" step="0.01" value="-0.2"></label><br>
+			<button class="button" type="submit"><span>Transform</span></button>
+		</fieldset>
+	</section>
+
+
+
+	<!--
+	This area will be the dragging transformation part <section>
+	Need more job on this area.
+	-->
+
+
+
+
+
+
+</form>
+
+
+
+<script src="js/Angle.js"></script>
+<script src="js/Vertex3D.js"></script>
+<script src="js/Matrix.js"></script>
+<script src="js/Transformable.js"></script>
+<script src="js/Face.js"></script>
+<script src="js/House.js"></script>
+
+<script src="interface/Inputs.js"></script>
+<script src="interface/RadioButton.js"></script>
+<script src="interface/TransformFieldset.js"></script>
+<script src="interface/CanvasManipulation.js"></script>
+
+<script src="finalProject.js"></script>
+
+</body>
+</html>
