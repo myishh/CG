@@ -1,4 +1,4 @@
-COMP.5460 Computer Graphics -- Final project
+COMP.5460 Computer Graphics -- Final project -- Weekly Progress
 Name:   Yang Meng
 Email:  Yang_Meng@student.uml.edu
 
