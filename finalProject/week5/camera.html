@@ -1,0 +1,101 @@
+
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <button class="dropbtn" onclick="location.href='index.html'">Back to index</button>
+  <button class="dropbtn" style="width: 100px" onclick="location.href='camera.html'">Refresh</button>
+
+<br><br>
+<div id="uiContainer">
+  <div id="ui">
+    <div id="CameraHeight"></div>
+     <div id="CameraAngle"></div>
+  </div>
+</div>
+</head>
+<body>
+  <br>
+<canvas id="canvas"></canvas>
+<!-- vertex shader -->
+<script id="3d-vertex-shader" type="x-shader/x-vertex">
+attribute vec4 a_position;
+
+attribute vec2 a_texcoord;
+varying vec2 v_texcoord;
+
+
+uniform mat4 u_matrix;
+
+void main() {
+  // Multiply the position by the matrix.
+  gl_Position = u_matrix * a_position;
+
+  // Pass the color to the fragment shader.
+    v_texcoord = a_texcoord;
+}
+</script>
+<!-- fragment shader -->
+<script id="3d-fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+// Passed in from the vertex shader.
+varying vec2 v_texcoord;
+
+// The texture.
+uniform sampler2D u_texture;
+
+
+
+void main() {
+   gl_FragColor =  texture2D(u_texture, v_texcoord);
+}
+
+</script>
+<!--
+for most samples webgl-utils only provides shader compiling/linking and
+canvas resizing because why clutter the examples with code that's the same in every sample.
+See http://webglfundamentals.org/webgl/lessons/webgl-boilerplate.html
+and http://webglfundamentals.org/webgl/lessons/webgl-resizing-the-canvas.html
+for webgl-utils, m3, m4, and webgl-lessons-ui.
+-->
+ <link rel="stylesheet" href="./css/camera.css">
+<script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+<script src="https://webglfundamentals.org/webgl/resources/webgl-lessons-ui.js"></script>
+<script src="https://webglfundamentals.org/webgl/resources/webgl-lessons-helper.js"></script>
+<script type="text/javascript" src="./js/camera.js"></script>
+
+<script type="text/javascript">
+// window.alert('text!!!');
+$.fn.RangeSlider = function(cfg){
+    this.sliderCfg = {
+        min: cfg && !isNaN(parseFloat(cfg.min)) ? Number(cfg.min) : null, 
+        max: cfg && !isNaN(parseFloat(cfg.max)) ? Number(cfg.max) : null,
+        step: cfg && Number(cfg.step) ? cfg.step : 1,
+        callback: cfg && cfg.callback ? cfg.callback : null
+    };
+
+    var $input = $(this);
+    var min = this.sliderCfg.min;
+    var max = this.sliderCfg.max;
+    var step = this.sliderCfg.step;
+    var callback = this.sliderCfg.callback;
+
+    $input.attr('min', min)
+        .attr('max', max)
+        .attr('step', step);
+
+    $input.bind("input", function(e){
+        $input.attr('value', this.value);
+        $input.css( 'background', 'linear-gradient(to right, #059CFA, white ' + this.value + '%, white)' );
+
+        if ($.isFunction(callback)) {
+            callback(this);
+        }
+    });
+};
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+COMP.5460 Computer Graphics Final project manual week 5
+Date:	Apr 25 2018
+Name: 	Yang Meng
+Email: 	Yang_Meng@student.uml.edu
+
+For the 5th week, I have done such work:
+1) Camera transformation to the object.
+2) Directional light demonstration

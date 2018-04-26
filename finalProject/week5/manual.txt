@@ -1,0 +1,13 @@
+COMP.5460 Computer Graphics Final project manual week 5
+
+Name: 	Yang Meng
+Email: 	Yang_Meng@student.uml.edu
+
+Instructions:
+1) Open the main html file "index.html"
+2) Select one projection from the navigation bar.
+3) Do the 3D translation, 3D rotation, 3D scaling and 3D shearing for each of those projections by sliding the range slider.
+4) To see the light transformation demonstration, just click the button "Point Light Demo". Then you could go to the light demonstration page. This is an 3D animation of light.
+5) Click the button "Directional Light Demo" to see the directional light demonstration.
+6) Click the button "Camera Transformation" to see the camera transformation.
+
