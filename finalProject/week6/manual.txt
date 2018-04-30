@@ -1,0 +1,13 @@
+COMP.5460 Computer Graphics Final project manual week 5
+
+Name: 	Yang Meng
+Email: 	Yang_Meng@student.uml.edu
+
+Instructions:
+1) Open the main html file "index.html"
+2) In the navigation bar, select one projection (Orthographic, Axonometric, Oblique, 1-Vanishing, 2-Vanishing, 3-Vanishing).
+3) Do the 3D translation, 3D rotation, 3D scaling and 3D shearing for each of those projections by sliding the range slider.
+4) Click the button "Point Light Demo" to see the light transformation demonstration.
+5) Click the button "Directional Light Demo" to see the directional light demonstration.
+6) Click the button "Camera Transformation" to see the camera transformation.
+
