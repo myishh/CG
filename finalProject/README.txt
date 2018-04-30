@@ -5,7 +5,7 @@ Email:  Yang_Meng@student.uml.edu
 ********************************** [Professor's Requirements] *******************************
 * 1.Modeling(2D elevations & 3D)                                                     [done] *
 * 2.Transform object: apply 3D (Translate/Rotate/Scale/SHear) transformations        [done] *
-* 3.Viewing	object from multiple views                                             [done] *
+* 3.Viewing	object from multiple views                                          [done] *
 * 4.Transform camera/viewer/light sources                                            [done] *
 * 5.Generate different projections(Orthographic/Axnonmetric/Oblique)                 [done] *
 * 6.Edit/Change perspective projection vanishing points (1, 2, 3)                    [done] *
