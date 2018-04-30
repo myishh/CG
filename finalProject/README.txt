@@ -2,7 +2,7 @@ COMP.5460 Computer Graphics -- Final project -- Weekly Progress
 Name:   Yang Meng
 Email:  Yang_Meng@student.uml.edu
 
-********************************** [Professor's Requirements] *******************************
+********************************** [Professor's Requirements] *********************************
 * 1.Modeling(2D elevations & 3D)                                                       [done] *
 * 2.Transform object: apply 3D (Translate/Rotate/Scale/SHear) transformations          [done] *
 * 3.Viewing	object from multiple views                                             [done] *
@@ -10,7 +10,7 @@ Email:  Yang_Meng@student.uml.edu
 * 5.Generate different projections(Orthographic/Axnonmetric/Oblique)                   [done] *
 * 6.Edit/Change perspective projection vanishing points (1, 2, 3)                      [done] *
 * 7.Create texture/bump/environmental mappings                                         [done] *
-*********************************************************************************************
+***********************************************************************************************
 
 ------week 1------
 For the 1st week, I have done such work:
