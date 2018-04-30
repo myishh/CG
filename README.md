@@ -1,4 +1,4 @@
-## Computer Graphics 2018 Spring
+## Computer Graphics 2018 Spring --- Milestone
 ###### Assignment 0 --- Journal Finder (Jan 31, 2018)
 
 ###### Programming Assignment 1 (Feb 21, 2018)
